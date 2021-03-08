@@ -27,14 +27,15 @@ RUN apt-get update && apt-get install -y \
     wget \
     less \
     && docker-php-ext-install -j$(nproc) opcache gd mysqli pdo pdo_mysql xsl zip intl soap bcmath exif gmp iconv  \
-    && pecl install -a xdebug-3.0.1 && docker-php-ext-enable xdebug \
+    && pecl install -a xdebug-3.0.3 && docker-php-ext-enable xdebug \
     && pecl install -a igbinary-3.2.1 && docker-php-ext-enable igbinary \
     && pecl install -a msgpack-2.1.2 && docker-php-ext-enable msgpack \
     && pecl install --nobuild memcached-3.1.5 \
     && cd "$(pecl config-get temp_dir)/memcached" && phpize \
     && ./configure --enable-memcached-igbinary --enable-memcached-msgpack \
     && make -j$(nproc) && make install && cd /tmp/ && docker-php-ext-enable memcached \
-    && pecl install -a uploadprogress-1.1.3 && docker-php-ext-enable uploadprogress
+    && pecl install -a uploadprogress-1.1.3 && docker-php-ext-enable uploadprogress \
+    && pecl install -a apcu-5.1.20 && docker-php-ext-enable apcu
 
 # php configuration
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
