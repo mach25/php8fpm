@@ -26,8 +26,9 @@ RUN apt-get update && apt-get install -y \
     curl \
     wget \
     less \
+    imagemagick \
     && docker-php-ext-install -j$(nproc) opcache gd mysqli pdo pdo_mysql xsl zip intl soap bcmath exif gmp iconv  \
-    && pecl install -a imagick-3.0.3 && docker-php-ext-enable imagick \
+    && pecl install -a imagick-3.5.1 && docker-php-ext-enable imagick \
     && pecl install -a xdebug-3.1.0 && docker-php-ext-enable xdebug \
     && pecl install -a igbinary-3.2.6 && docker-php-ext-enable igbinary \
     && pecl install -a msgpack-2.1.2 && docker-php-ext-enable msgpack \
